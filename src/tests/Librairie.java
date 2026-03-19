@@ -2,6 +2,7 @@ package tests;
 
 import livres.Auteur;
 import livres.Ouvrage;
+import livres.Pays;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +12,9 @@ public class Librairie {
     private List<Ouvrage> ouvrages = new ArrayList<>();
 
     public Librairie(){
-        Auteur albertine = new Auteur("Albertine", "Tremblay", "Canada");
-        Auteur john = new Auteur("John", "Smith", "Etats-Unis");
-        Auteur jean = new Auteur("Jean", "Némarre", "Suisse");
+        Auteur albertine = new Auteur("Albertine", "Tremblay", new Pays("Canada", "CAD"));
+        Auteur john = new Auteur("John", "Smith", new Pays("Etats-Unis", "USA"));
+        Auteur jean = new Auteur("Jean", "Némarre", new Pays("Suisse", "SUI"));
         auteurs.add(albertine);
         auteurs.add(john);
         auteurs.add(jean);
