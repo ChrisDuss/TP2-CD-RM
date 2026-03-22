@@ -19,6 +19,7 @@ public class TestOuvrage {
         TestOuvrage test = new TestOuvrage();
         test.testOuvrages();
         test.testTrouver();
+        test.testVerifPays();
     }
 
 
@@ -101,6 +102,43 @@ public class TestOuvrage {
 
         resultat = bibliotheque.trouverOuvrages(new Auteur("Jacques", "Beaulieu", new Pays("France", "FRC")));
         System.out.println("Livres de Jacques: " + resultat);
+    }
+
+// regarder pour la verif car elle est mis private dans pays
+
+    private void testVerifPays () {
+
+        Pays pays = new Pays("Canada", "CAD" );
+
+       if(validerCodePays(pays.getCodePays())){
+           System.out.println("le code du pays est correct");
+       }else {
+           System.out.println("code pays invalide il faut exactement 3 lettre majuscule");
+       }
+        //associer auteur a un pays
+        System.out.println(new Auteur("Jacques", "Beaulieu", pays));
+
+    }
+    private boolean validerCodePays(String codePays) {
+        boolean valide = false;
+        int majCount = 0;
+
+        //exactement 3 lettres
+        if (codePays.length() == 3) {
+            //majuscule
+            for (int i = 0; i < codePays.length(); i++) {
+                if (isMaj(codePays.charAt(i))) {
+                    majCount += 1;
+                }
+            }
+            if (majCount == 3) valide = true;
+        }
+
+        return valide;
+    }
+
+    private boolean isMaj(char c) {
+        return (c >= 65 && c <= 90);
     }
 
 
