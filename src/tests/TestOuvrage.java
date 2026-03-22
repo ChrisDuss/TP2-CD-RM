@@ -1,11 +1,13 @@
 package tests;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import livres.Ouvrage;
 import livres.Auteur;
 import livres.Pays;
+import livres.Serie;
 
 /**
  * CoursPOO 1
@@ -20,6 +22,7 @@ public class TestOuvrage {
         test.testOuvrages();
         test.testTrouver();
         test.testVerifPays();
+        test.testSerie();
     }
 
 
@@ -105,42 +108,80 @@ public class TestOuvrage {
     }
 
 // regarder pour la verif car elle est mis private dans pays
+    /// La vérif se fait dans setCodePays() donc pas besoin ^^
+    /// des que tu crée le pays il se fait verifier
+    /// tes tests son null aussi
 
     private void testVerifPays () {
 
         Pays pays = new Pays("Canada", "CAD" );
 
-       if(validerCodePays(pays.getCodePays())){
-           System.out.println("le code du pays est correct");
-       }else {
-           System.out.println("code pays invalide il faut exactement 3 lettre majuscule");
-       }
+//       if(validerCodePays(pays.getCodePays())){
+//           System.out.println("le code du pays est correct");
+//       }else {
+//           System.out.println("code pays invalide il faut exactement 3 lettre majuscule");
+//       }
+
         //associer auteur a un pays
         System.out.println(new Auteur("Jacques", "Beaulieu", pays));
 
     }
-    private boolean validerCodePays(String codePays) {
-        boolean valide = false;
-        int majCount = 0;
 
-        //exactement 3 lettres
-        if (codePays.length() == 3) {
-            //majuscule
-            for (int i = 0; i < codePays.length(); i++) {
-                if (isMaj(codePays.charAt(i))) {
-                    majCount += 1;
-                }
-            }
-            if (majCount == 3) valide = true;
-        }
+//    private boolean validerCodePays(String codePays) {
+//        boolean valide = false;
+//        int majCount = 0;
+//
+//        //exactement 3 lettres
+//        if (codePays.length() == 3) {
+//            //majuscule
+//            for (int i = 0; i < codePays.length(); i++) {
+//                if (isMaj(codePays.charAt(i))) {
+//                    majCount += 1;
+//                }
+//            }
+//            if (majCount == 3) valide = true;
+//        }
+//
+//        return valide;
+//    }
+//
+//    private boolean isMaj(char c) {
+//        return (c >= 65 && c <= 90);
+//    }
 
-        return valide;
+    public void testSerie() {
+        Pays usa = new Pays("Etats-Unis", "USA");
+        Pays cad = new Pays("Canada", "CAD");
+
+        Auteur albertine = new Auteur("Albertine", "Tremblay", cad);
+        Auteur john = new Auteur("John", "Smith", usa);
+
+        Ouvrage livre4 = new Ouvrage("Test2", albertine, Ouvrage.Format.PAPIER, null, 5);
+        Ouvrage livre5 = new Ouvrage("Test3", albertine, Ouvrage.Format.PAPIER, LocalDate.now(), 10);
+        Ouvrage livre6 = new Ouvrage("Test5", john, Ouvrage.Format.PAPIER, LocalDate.now(), 5);
+
+        ArrayList<Ouvrage> collectionTest = new ArrayList<>();
+        collectionTest.add(livre4);
+        collectionTest.add(livre5);
+        collectionTest.add(livre6);
+
+        System.out.println("\n-----Test des constructeurs de série-----------");
+        Serie testSerie = new Serie("Serie Test", collectionTest);
+        Serie serie2 = new Serie("Test Vide", new ArrayList<>());
+
+        System.out.println(testSerie);
+        System.out.println(serie2);
+
+        System.out.println("\n----------Test Serie-----------");
+        System.out.println("\n-- getter --");
+        System.out.println(testSerie.getNomSerie().equals("Serie Test") + " --> est Serie Test");
+        System.out.println((serie2.getListeOuvrage().equals(new ArrayList<>())) + " --> serie2 est vide");
+
+        System.out.println("\n-- setter --");
+        System.out.println(testSerie.getNomSerie());
+        testSerie.setNomSerie("test Serie");
+        System.out.println(testSerie.getNomSerie());
     }
-
-    private boolean isMaj(char c) {
-        return (c >= 65 && c <= 90);
-    }
-
 
 }
 
