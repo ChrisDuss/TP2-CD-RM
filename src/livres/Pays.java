@@ -1,5 +1,7 @@
 package livres;
 
+import java.util.Objects;
+
 /**
  * TP2-CD-RM
  *
@@ -55,6 +57,20 @@ public class Pays {
 
     private boolean isMaj(char c) {
         return (c >= 65 && c <= 90);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Pays pays = (Pays) o;
+        return Objects.equals(nom, pays.nom) && Objects.equals(codePays, pays.codePays);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nom, codePays);
     }
 
     @Override
