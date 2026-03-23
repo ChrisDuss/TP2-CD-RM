@@ -1,11 +1,13 @@
 package tests;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import livres.Ouvrage;
 import livres.Auteur;
 import livres.Pays;
+import livres.Serie;
 
 /**
  * CoursPOO 1
@@ -20,6 +22,7 @@ public class TestOuvrage {
         test.testOuvrages();
         test.testTrouver();
         test.testVerifPays();
+        test.testSerie();
     }
 
 
@@ -119,6 +122,39 @@ public class TestOuvrage {
         System.out.println();
     }
 
+    public void testSerie() {
+        Pays usa = new Pays("Etats-Unis", "USA");
+        Pays cad = new Pays("Canada", "CAD");
+
+        Auteur albertine = new Auteur("Albertine", "Tremblay", cad);
+        Auteur john = new Auteur("John", "Smith", usa);
+
+        Ouvrage livre4 = new Ouvrage("Test2", albertine, Ouvrage.Format.PAPIER, null, 5);
+        Ouvrage livre5 = new Ouvrage("Test3", albertine, Ouvrage.Format.PAPIER, LocalDate.now(), 10);
+        Ouvrage livre6 = new Ouvrage("Test5", john, Ouvrage.Format.PAPIER, LocalDate.now(), 5);
+
+        ArrayList<Ouvrage> collectionTest = new ArrayList<>();
+        collectionTest.add(livre4);
+        collectionTest.add(livre5);
+        collectionTest.add(livre6);
+
+        System.out.println("\n-----Test des constructeurs de série-----------");
+        Serie testSerie = new Serie("Serie Test", collectionTest);
+        Serie serie2 = new Serie("Test Vide", new ArrayList<>());
+
+        System.out.println(testSerie);
+        System.out.println(serie2);
+
+        System.out.println("\n----------Test Serie-----------");
+        System.out.println("\n-- getter --");
+        System.out.println(testSerie.getNomSerie().equals("Serie Test") + " --> est Serie Test");
+        System.out.println((serie2.getListeOuvrage().equals(new ArrayList<>())) + " --> serie2 est vide");
+
+        System.out.println("\n-- setter --");
+        System.out.println(testSerie.getNomSerie());
+        testSerie.setNomSerie("test Serie");
+        System.out.println(testSerie.getNomSerie());
+    }
 
 }
 
