@@ -33,18 +33,18 @@ public class TestOuvrage {
 
         //Voici une partie des tests! Il faut en ajouter, pour les fonctionnalités non testées!
         System.out.println("-----Test des constructeurs d'ouvrage et des diverses validations-----------");
-        Ouvrage livreA = new Ouvrage("Titre assez long", john);
+        Ouvrage livreA = new OuvragePapier("Titre assez long", john);
         System.out.println(livreA);
-        Ouvrage livreB = new Ouvrage("Ti", john);
+        Ouvrage livreB = new OuvragePapier("Ti", john);
         System.out.println(livreB);
-        Ouvrage livreC = new Ouvrage(null, john);
+        Ouvrage livreC = new OuvragePapier(null, john);
         System.out.println(livreC);
 
         //bibliotheque.Auteur null et valeur par défaut de l'bibliotheque.Auteur
-        Ouvrage livreA1 = new Ouvrage("Titre assez long", null);
+        Ouvrage livreA1 = new OuvragePapier("Titre assez long", null);
         System.out.println(livreA1);
         //bibliotheque.Auteur fonctionnel
-        Ouvrage livre1 = new Ouvrage("Tout va bien", albertine);
+        Ouvrage livre1 = new OuvragePapier("Tout va bien", albertine);
         System.out.println(livre1);
 
         //Date null et valeur par défaut de la date
