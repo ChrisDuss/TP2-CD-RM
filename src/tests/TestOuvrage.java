@@ -4,10 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import livres.Ouvrage;
-import livres.Auteur;
-import livres.Pays;
-import livres.Serie;
+import livres.*;
 
 /**
  * CoursPOO 1
@@ -54,15 +51,15 @@ public class TestOuvrage {
         System.out.println(livre1);
 
         //Test de la validation sur le nb d'exemplaires (valide et non valide)
-        Ouvrage livre2 = new Ouvrage("Tout va bien", albertine, Ouvrage.Format.AUDIO, LocalDate.now(), -10);
+        Ouvrage livre2 = new OuvrageAudio("Tout va bien", albertine, 10, ".mp4");
         System.out.println(livre2);
 
-        livre2 = new Ouvrage("Tout va bien", albertine, Ouvrage.Format.PAPIER, LocalDate.now(), 20);
+        livre2 = new OuvragePapier("Tout va bien", albertine, LocalDate.now(), 200, 100);
         System.out.println(livre2);
 
         System.out.println("\n-----Tests des méthodes acheter et vendre-----------");
 
-        Ouvrage livre3 = new Ouvrage("Musique du hasard", new Auteur("Paul", "Auster", new Pays("Etats-Unis", "USA")), Ouvrage.Format.PAPIER, LocalDate.now(), 5);
+        Ouvrage livre3 = new OuvragePapier("Musique du hasard", new Auteur("Paul", "Auster", new Pays("Etats-Unis", "USA")), LocalDate.now(), 5);
         System.out.println(livre3);
 
         livre3.acheter(5);
@@ -74,14 +71,14 @@ public class TestOuvrage {
         System.out.println("On peut vendre 10 livres? " + livre3.vendre(10));
         System.out.println(livre3);
 
-        Ouvrage livre4 = new Ouvrage("Test", new Auteur("A", "B", new Pays("Etats-Unis", "USA")), Ouvrage.Format.PAPIER, LocalDate.now(), 5);
+        Ouvrage livre4 = new OuvragePapier("Test", new Auteur("A", "B", new Pays("Etats-Unis", "USA")), LocalDate.now(), 5);
 
         System.out.println("\n-----Tests de la  méthode equals()-----------");
         //Deux ouvrages égaux
-        Ouvrage livre5 = new Ouvrage("Test", new Auteur("A", "B", new Pays("Etats-Unis", "USA")), Ouvrage.Format.PAPIER, null, 5);
-        Ouvrage livre6 = new Ouvrage("Test", new Auteur("A", "B", new Pays("Etats-Unis", "USA")), Ouvrage.Format.PAPIER, LocalDate.now(), 10);
+        Ouvrage livre5 = new OuvragePapier("Test", new Auteur("A", "B", new Pays("Etats-Unis", "USA")), null, 5);
+        Ouvrage livre6 = new OuvragePapier("Test", new Auteur("A", "B", new Pays("Etats-Unis", "USA")), LocalDate.now(), 10);
         //Un qui ne l'est pas
-        Ouvrage livre7 = new Ouvrage("Test", new Auteur("Z", "B", new Pays("Etats-Unis", "USA")), Ouvrage.Format.PAPIER, LocalDate.now(), 5);
+        Ouvrage livre7 = new OuvragePapier("Test", new Auteur("Z", "B", new Pays("Etats-Unis", "USA")), LocalDate.now(), 5);
 
         System.out.println("Test de la méthode equals d'bibliotheque.Ouvrage:" + livre4.equals(livre5));
         System.out.println("Test de la méthode equals d'bibliotheque.Ouvrage:" + livre4.equals(livre6));
@@ -129,9 +126,9 @@ public class TestOuvrage {
         Auteur albertine = new Auteur("Albertine", "Tremblay", cad);
         Auteur john = new Auteur("John", "Smith", usa);
 
-        Ouvrage livre4 = new Ouvrage("Test2", albertine, Ouvrage.Format.PAPIER, null, 5);
-        Ouvrage livre5 = new Ouvrage("Test3", albertine, Ouvrage.Format.PAPIER, LocalDate.now(), 10);
-        Ouvrage livre6 = new Ouvrage("Test5", john, Ouvrage.Format.PAPIER, LocalDate.now(), 5);
+        Ouvrage livre4 = new OuvragePapier("Test2", albertine, null, 5);
+        Ouvrage livre5 = new OuvragePapier("Test3", albertine, LocalDate.now(), 10);
+        Ouvrage livre6 = new OuvragePapier("Test5", john, LocalDate.now(), 5);
 
         ArrayList<Ouvrage> collectionTest = new ArrayList<>();
         collectionTest.add(livre4);

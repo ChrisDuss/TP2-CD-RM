@@ -15,28 +15,28 @@ public abstract class Ouvrage {
     public static final String TITRE_INCONNU = "Titre Inconnu";
     public static final int NOMBRE_EXEMPLAIRE_DEFAUT = 0;
     public static final int LONGUEUR_TITRE_MIN = 3;
-    public static final Ouvrage TYPE_DEFAULT = new OuvragePapier();
 
     private String titre = TITRE_INCONNU;
     private Auteur auteur = new Auteur();
     private LocalDate date;
-    private final Ouvrage type;
     private int nombreExemplaires = NOMBRE_EXEMPLAIRE_DEFAUT;
 
-    public Ouvrage(String titre, Auteur auteur, Ouvrage type,
-                   LocalDate date, int nombreExemplaires) {
+    public Ouvrage(String titre, Auteur auteur, LocalDate date, int nombreExemplaires) {
         setTitre(titre);
         setAuteur(auteur);
-        this.type = type;
         setDate(date);
         setNombreExemplaires(nombreExemplaires);
     }
-    public Ouvrage(String titre, Auteur auteur,Ouvrage type) {
-        this(titre, auteur, type, null, NOMBRE_EXEMPLAIRE_DEFAUT);
+
+    public Ouvrage(String titre, Auteur auteur, LocalDate date) {
+        setTitre(titre);
+        setAuteur(auteur);
+        setDate(date);
+        setNombreExemplaires(nombreExemplaires);
     }
 
     public Ouvrage(String titre, Auteur auteur) {
-        this(titre, auteur, TYPE_DEFAULT, null, NOMBRE_EXEMPLAIRE_DEFAUT);
+        this(titre, auteur, null, NOMBRE_EXEMPLAIRE_DEFAUT);
     }
 
     public String getTitre() {
@@ -83,10 +83,6 @@ public abstract class Ouvrage {
         }
     }
 
-    public Ouvrage getType() {
-        return type;
-    }
-
     public String identificateur() {
         String id = titre.substring(0, 2) + "_" +
                 auteur.getNom().substring(0, 1) +
@@ -101,7 +97,7 @@ public abstract class Ouvrage {
         String affichageDAte = date != null ? date.toString() : "Non Disponible";
 
         return "[" + identificateur() + "] " + titre + " (" + auteur.getPrenom() + " "
-                + auteur.getNom() + ") - " + type + " - disponible le " + affichageDAte + " (" + nombreExemplaires + " ex.)";
+                + auteur.getNom() + ") - " + " - disponible le " + affichageDAte + " (" + nombreExemplaires + " ex.)";
     }
 
     public void acheter(int nombre) {
@@ -128,13 +124,12 @@ public abstract class Ouvrage {
         if (!(o instanceof Ouvrage)) return false;
         Ouvrage ouvrage = (Ouvrage) o;
         return Objects.equals(titre, ouvrage.titre) &&
-                Objects.equals(auteur, ouvrage.auteur) &&
-                type == ouvrage.type;
+                Objects.equals(auteur, ouvrage.auteur);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(titre, auteur, type);
+        return Objects.hash(titre, auteur);
     }
 
     private static boolean nombreExemplairesValides(int nombreExemplaires) {
