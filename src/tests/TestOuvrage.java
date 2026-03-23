@@ -104,41 +104,19 @@ public class TestOuvrage {
         System.out.println("Livres de Jacques: " + resultat);
     }
 
-// regarder pour la verif car elle est mis private dans pays
 
-    private void testVerifPays () {
-
-        Pays pays = new Pays("Canada", "CAD" );
-
-       if(validerCodePays(pays.getCodePays())){
-           System.out.println("le code du pays est correct");
-       }else {
-           System.out.println("code pays invalide il faut exactement 3 lettre majuscule");
-       }
+    private void testVerifPays() {
+        System.out.println();
+        System.out.println("-----test pour vérifier si le code d'un pays fonctionne----");
+        //test qui fonctionne (true)
+        Pays pays = new Pays("Canada", "CAD");
         //associer auteur a un pays
         System.out.println(new Auteur("Jacques", "Beaulieu", pays));
-
-    }
-    private boolean validerCodePays(String codePays) {
-        boolean valide = false;
-        int majCount = 0;
-
-        //exactement 3 lettres
-        if (codePays.length() == 3) {
-            //majuscule
-            for (int i = 0; i < codePays.length(); i++) {
-                if (isMaj(codePays.charAt(i))) {
-                    majCount += 1;
-                }
-            }
-            if (majCount == 3) valide = true;
-        }
-
-        return valide;
-    }
-
-    private boolean isMaj(char c) {
-        return (c >= 65 && c <= 90);
+        System.out.println();
+        //test qui ne fonctionne pas (false)
+        Pays pays2 = new Pays("Mexique", "mex");
+        System.out.println(new Auteur("Jacques", "Beaulieu", pays2));
+        System.out.println();
     }
 
 
